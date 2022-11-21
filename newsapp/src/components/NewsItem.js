@@ -5,7 +5,7 @@ export default function NewsItem(props) {
         <div className='my-3'>
             <div className="card">
                 <div style={{ display: 'flex', justifyContent: 'flex-end', position: 'absolute', right: '0' }}>
-                    <span className="badge rounded-pill bg-danger" >{props.source}</span>
+                    <span className="badge rounded-pill bg-dark" >{props.source}</span>
                 </div>
                 <img src={props.imageUrl ? props.imageUrl : 'https://image.shutterstock.com/image-vector/breaking-news-background-planet-260nw-698680423.jpg'} className="card-img-top" alt="..." />
                 <div className="card-body">

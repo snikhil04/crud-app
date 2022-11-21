@@ -12,6 +12,8 @@ export default function News(props) {
     const [page, setPage] = useState(1)
     const [totalResults, setTotalResults] = useState(0)
 
+ 
+    
     const fetchNews = async () => {
         props.setProgress(10)
         console.log('page on fetchNews => ' + page)
@@ -25,22 +27,24 @@ export default function News(props) {
         setLoading(false)
         props.setProgress(100)
     }
-
+    
     const changeUpperCase = (string) => { return string.charAt(0).toUpperCase().concat(string.substr(1)); }
     useEffect(() => {
         fetchNews(); document.title = `${changeUpperCase(props.category)} - NewsMonkey`;
         // eslint-disable-next-line
     }, [])
-
+    
     const fetchMoreData = async () => {
-        let url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=${props.apiKey}&page=${page + 1}&pageSize=${props.pageSize}`;
-        setPage(prevPage => prevPage + 1);
+      
+        let url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=${props.apiKey}&page=${page+1}&pageSize=${props.pageSize}`;
+        setPage(page+1)
         let data = await fetch(url);
         let parsedData = await data.json();
         setArticles(articles.concat(parsedData.articles));
         setTotalResults(parsedData.totalResults)
     };
-
+    console.log('page: ', page);   
+    
     return (
         <>
             <h1 className='text-center' style={{ margin: '35px 0px', marginTop: '90px' }}>Top ({changeUpperCase(props.category)}) Headlines</h1>
